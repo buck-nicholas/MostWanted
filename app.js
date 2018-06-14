@@ -97,7 +97,11 @@ function searchByOccupation(people) {
 
 function searchByAge(people){
   let userInputAge = prompt("Please enter the age of the person you are looking for.")
-
+  for (let i = 0; i < people.length; i++) {
+    let age = calculateAge(people[i])
+    people[i].age = age;
+  }
+  console.log(people[0].firstName + "'s is " + people[0].age);
   let newArray = people.filter(function(el){
     if(el.age == userInputAge){
     return true;
@@ -110,7 +114,7 @@ function searchByGender(people){
   let userInputGender = prompt("Please enter gender of the person you are looking for.")
 
   let newArray = people.filter(function(el){
-    if (el.gender == userInputGender) {
+    if (searchByGender == userInputGender) {
       return true
     }
   });
@@ -187,9 +191,9 @@ function displayPerson(person){
 }
 
 function calculateAge(person) {
-  let dob;
-  dob = person.dob;
-  let dobArray = dob.split("/");
+  let birthday;
+  birthday = person.dob;
+  let dobArray = birthday.split("/");
   // getting todays date
   let todaysDate = new Date();
   let yearNow = todaysDate.getFullYear();
