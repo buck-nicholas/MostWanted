@@ -33,6 +33,7 @@ function searchByTraits(people) {
     case "eye color":
       filteredPeople = searchByEyeColor(people);
       break;
+    // test comment XDXDXDXDXDXD eggs dee
     case "occupation":
       filteredPeople = searchByOccupation(people);
       break;
