@@ -180,6 +180,7 @@ function displayPerson(person){
   alert(personInfo);
 }
 
+
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
