@@ -133,6 +133,7 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
+    displayPerson(person);
     break;
     case "family":
     // TODO: get person's family
@@ -177,7 +178,30 @@ function displayPerson(person){
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   // TODO: finish getting the rest of the information to display
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Age: " + calculateAge(person) + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
   alert(personInfo);
+}
+
+function calculateAge(person) {
+  let dob;
+  dob = person.dob;
+  let dobArray = dob.split("/");
+  // getting todays date
+  let todaysDate = new Date();
+  let yearNow = todaysDate.getFullYear();
+  let monthNow = todaysDate.getMonth() + 1;
+  let dayNow = todaysDate.getDate();
+  let age;
+  age = yearNow - dobArray[2];
+  if (monthNow < dobArray[0] && dayNow < dobArray[1]) { // if month and date are less than birthday, age--
+    age--;
+  }
+  return age;
+  // newStr = str.substr(str.length - 4);
 }
 
 // function that prompts and validates user input
