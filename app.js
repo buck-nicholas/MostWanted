@@ -85,7 +85,7 @@ function searchByWeight(people) {
 }
 
 function searchByOccupation(people) {
-  let userInputOccupation = prompt("What is the person's occupation? Enter: Assistant, Doctor, Landscaper, Polititian, Programmer, or Nurse");
+  let userInputOccupation = prompt("What is the person's occupation? Enter: Assistant, Doctor, Landscaper, politician, Programmer, or Nurse");
 
   let newArray = people.filter(function(el){
     if(el.occupation == userInputOccupation){
@@ -97,7 +97,11 @@ function searchByOccupation(people) {
 
 function searchByAge(people){
   let userInputAge = prompt("Please enter the age of the person you are looking for.")
-
+  for (let i = 0; i < people.length; i++) {
+    let age = calculateAge(people[i])
+    people[i].age = age;
+  }
+  console.log(people[0].firstName + "'s is " + people[0].age);
   let newArray = people.filter(function(el){
     if(el.age == userInputAge){
     return true;
@@ -110,7 +114,7 @@ function searchByGender(people){
   let userInputGender = prompt("Please enter gender of the person you are looking for.")
 
   let newArray = people.filter(function(el){
-    if (el.gender == userInputGender) {
+    if (searchByGender == userInputGender) {
       return true
     }
   });
@@ -133,6 +137,7 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
+    displayPerson(person);
     break;
     case "family":
     // TODO: get person's family
@@ -177,7 +182,84 @@ function displayPerson(person){
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   // TODO: finish getting the rest of the information to display
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Age: " + calculateAge(person) + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
   alert(personInfo);
+}
+
+function getParentID(people){
+  let parentArray = [];
+    for (var i = 0; i < people.length; i++) {
+      for (var i = 0; i < people.parents.length; i++) {
+        parentArray.push(i);
+    }
+    parentArray.push(parentID);
+    }
+  return parentArray;
+}
+
+function checkChildren(people){
+  let childArray = [];
+    for (var i = 0; i < people.parents.length; i++) {
+      if (people[i].parents.includes(parentID)) {
+        let childID = people[i].id;
+        childArray.push(childID);
+      }
+  return childArray;
+}
+
+function determineDescendents(people){
+
+let descendantsArray = [];
+if(parentArray.includes(parentID)) {
+  for (i =0; i < people.length; i++){
+      if(people[i].parents(parentID)){
+        let childID = people[i];
+        descendantsArray.push(childID);
+      }
+    }
+  }
+  return descendantsArray;
+}
+
+
+
+function determineFamily(people){
+
+  let familyArray = [];
+  if(people.currentspouse > 1){
+    familyArray.push(people.currentspouse);
+  }
+  let childArray = checkChildren(people);
+    if (childArray.length > 0) {
+      familyArray.concat(childArray);
+    }
+  return familyArray;
+}
+
+
+
+
+
+  function calculateAge(person) {
+  let birthday;
+  birthday = person.dob;
+  let dobArray = birthday.split("/");
+  // getting todays date
+  let todaysDate = new Date();
+  let yearNow = todaysDate.getFullYear();
+  let monthNow = todaysDate.getMonth() + 1;
+  let dayNow = todaysDate.getDate();
+  let age;
+  age = yearNow - dobArray[2];
+  if (monthNow < dobArray[0] && dayNow < dobArray[1]) { // if month and date are less than birthday, age--
+    age--;
+  }
+  return age;
+  // newStr = str.substr(str.length - 4);
 }
 
 
