@@ -5,9 +5,10 @@ Build all of your functions for displaying and gathering information below (GUI)
 // app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  let filteredPeople;
   switch(searchType){
     case 'yes':
-    // TODO: search by name
+    filteredPeople = searchByName(people);
     break;
     case 'no':
     searchByTraits(people);
@@ -17,6 +18,9 @@ function app(people){
     app(people); // restart app
     break;
   }
+  let foundPerson = filteredPeople[0];
+
+  mainMenu(foundPerson, people);
 }
 
 function searchByTraits(people) {
@@ -33,7 +37,6 @@ function searchByTraits(people) {
     case "eye color":
       filteredPeople = searchByEyeColor(people);
       break;
-    // test comment XDXDXDXDXDXD eggs dee
     case "occupation":
       filteredPeople = searchByOccupation(people);
       break;
@@ -43,7 +46,6 @@ function searchByTraits(people) {
     case "gender":
       filteredPeople = searchByGender(people);
       break;
-    // so on and so forth
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
@@ -121,7 +123,13 @@ function searchByName(people){
   var lastName = promptFor("What is the person's last name?", chars);
 
   // TODO: find the person using the name they entered
-
+  let newArray = people.filter(function (el) {
+    if(el.firstName == firstName || el.lastName == lastName) {
+      return true;
+      // return true if el.firstName or el.lastName == user input for firstName and lastName
+    }
+  });
+  return newArray;
 }
 
 // alerts a list of people
