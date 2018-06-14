@@ -34,6 +34,15 @@ function searchByTraits(people) {
       filteredPeople = searchByEyeColor(people);
       break;
     // test comment XDXDXDXDXDXD eggs dee
+    case "occupation":
+      filteredPeople = searchByOccupation(people);
+      break;
+    case "Age":
+      filteredPeople = searchByAge(people);
+      break;
+    case "gender":
+      filteredPeople = searchByGender(people);
+      break;
     // so on and so forth
     default:
       alert("You entered an invalid search type! Please try again.");
@@ -72,6 +81,8 @@ function searchByWeight(people) {
 
   return newArray;
 }
+
+
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
