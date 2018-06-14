@@ -30,21 +30,10 @@ function searchByTraits(people) {
     case "weight":
       filteredPeople = searchByWeight(people);
       break;
-
-    case "eyecoler":
-      filteredPeople = searchByEyeColor(people);
-      break;
-    case "occupation" = searchByOccupation(people);
-      break;
-    case "age" = searchByAge(people);
-      break;
-
     case "eye color":
       filteredPeople = searchByEyeColor(people);
-      console.log(filteredPeople);
       break;
     // so on and so forth
-
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
@@ -79,22 +68,9 @@ function searchByWeight(people) {
     }
     // return true if el.height matches userInputHeight
   });
-    return newArray;
+
+  return newArray;
 }
-
-function searchByOccupation(people) {
-  let userInputOccupation = Prompt("What is their occupation? Please enter Programmer, assistant, landscaper, nurse, student, architect, doctor, or polititian.");
-
-  let newArray = people.filter(function (el) {
-    if(el.occupation == userInputOccupation) {
-      return true;
-    }
-  });
-    return newArray;
-}
-
-
-
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
