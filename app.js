@@ -81,6 +81,38 @@ function searchByWeight(people) {
   return newArray;
 }
 
+function searchByOccupation(people) {
+  let userInputOccupation = prompt("What is the person's occupation? Enter: Assistant, Doctor, Landscaper, Polititian, Programmer, or Nurse");
+
+  let newArray = people.filter(function(el){
+    if(el.occupation == userInputOccupation){
+      return true;
+    }
+  });
+  return newArray;
+}
+
+function searchByAge(people){
+  let userInputAge = prompt("Please enter the age of the person you are looking for.")
+
+  let newArray = people.filter(function(el){
+    if(el.age == userInputAge){
+    return true;
+    }
+  });
+  return newArray;
+}
+
+function searchByGender(people){
+  let userInputGender = prompt("Please enter gender of the person you are looking for.")
+
+  let newArray = people.filter(function(el){
+    if (searchByGender == userInputGender) {
+      return true
+    }
+  });
+  return newArray
+}
 
 
 // Menu function to call once you find who you are looking for
