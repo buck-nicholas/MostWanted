@@ -33,6 +33,7 @@ function searchByTraits(people) {
     case "eye color":
       filteredPeople = searchByEyeColor(people);
       break;
+    // test comment XDXDXDXDXDXD eggs dee
     // so on and so forth
     default:
       alert("You entered an invalid search type! Please try again.");
