@@ -110,7 +110,7 @@ function searchByGender(people){
   let userInputGender = prompt("Please enter gender of the person you are looking for.")
 
   let newArray = people.filter(function(el){
-    if (searchByGender == userInputGender) {
+    if (el.gender == userInputGender) {
       return true
     }
   });
