@@ -40,7 +40,7 @@ function searchByTraits(people) {
     case "occupation":
       filteredPeople = searchByOccupation(people);
       break;
-    case "Age":
+    case "age":
       filteredPeople = searchByAge(people);
       break;
     case "gender":
@@ -161,7 +161,7 @@ function searchByName(people){
 
   // TODO: find the person using the name they entered
   let newArray = people.filter(function (el) {
-    if(el.firstName == firstName || el.lastName == lastName) {
+    if(el.firstName == firstName && el.lastName == lastName) {
       return true;
       // return true if el.firstName or el.lastName == user input for firstName and lastName
     }
