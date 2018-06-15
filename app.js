@@ -4,7 +4,6 @@ Build all of your functions for displaying and gathering information below (GUI)
 
 // app is the function called to start the entire application
 function app(people){
-  getParentID(people);
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let filteredPeople;
   switch(searchType){
@@ -142,6 +141,7 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
+    console.log(determineFamily(people, person));
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -206,16 +206,20 @@ function getParentID(people){
   return parentArray;
 }
 
-function checkChildren(people){
+function checkChildren(people, person){
   let childArray = [];
-    for (var i = 0; i < people.parents.length; i++) {
-      if (people[i].parents.includes(parentID)) {
+  console.log(person.id);
+    for (let i = 0; i < people.length; i++) {
+      // console.log(i);
+      if (people[i].parents.includes(person.id)) {
         let childID = people[i].id;
         childArray.push(childID);
+        console.log('found child');
       }
+    }
   return childArray;
-  }
 }
+
 function determineDescendents(people){
 
 let descendantsArray = [];
@@ -232,17 +236,17 @@ if(parentArray.includes(parentID)) {
 
 
 
-function determineFamily(people){
+function determineFamily(people, person){
 
   let familyArray = [];
-  if(people.currentspouse > 1){
-    familyArray.push(people.currentspouse);
+  if(person.currentSpouse > 0){
+    familyArray.push(person.currentSpouse);
   }
-  let childArray = checkChildren(people);
-    if (childArray.length > 0) {
-      familyArray.concat(childArray);
-    }
-  return familyArray;
+  let childArray = checkChildren(people, person);
+  if (childArray.length > 0) {
+    treeArray = familyArray.concat(childArray);
+  }
+  return treeArray;
 }
 
 
