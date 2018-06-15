@@ -4,6 +4,7 @@ Build all of your functions for displaying and gathering information below (GUI)
 
 // app is the function called to start the entire application
 function app(people){
+  getParentID(people);
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let filteredPeople;
   switch(searchType){
@@ -144,6 +145,7 @@ function mainMenu(person, people){
     break;
     case "descendants":
     // TODO: get person's descendants
+    getParentID(people);
     break;
     case "restart":
     app(people); // restart
@@ -169,6 +171,7 @@ function searchByName(people){
   return newArray;
 }
 
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -193,11 +196,13 @@ function displayPerson(person){
 function getParentID(people){
   let parentArray = [];
     for (var i = 0; i < people.length; i++) {
-      for (var i = 0; i < people.parents.length; i++) {
-        parentArray.push(i);
+      for (var j = 0; j < people[i].parents.length; j++) {
+        if (parentArray.includes(people[i].parents[j]) != true) {
+        parentArray.push(people[i].parents[j]);
+        }
     }
-    parentArray.push(parentID);
     }
+      console.log(parentArray);
   return parentArray;
 }
 
@@ -209,8 +214,8 @@ function checkChildren(people){
         childArray.push(childID);
       }
   return childArray;
+  }
 }
-
 function determineDescendents(people){
 
 let descendantsArray = [];
