@@ -85,7 +85,7 @@ function searchByWeight(people) {
 }
 
 function searchByOccupation(people) {
-  let userInputOccupation = prompt("What is the person's occupation? Enter: Assistant, Doctor, Landscaper, Polititian, Programmer, or Nurse");
+  let userInputOccupation = prompt("What is the person's occupation? Enter: Assistant, Doctor, Landscaper, politician, Programmer, or Nurse");
 
   let newArray = people.filter(function(el){
     if(el.occupation == userInputOccupation){
@@ -190,7 +190,61 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-function calculateAge(person) {
+function getParentID(people){
+  let parentArray = [];
+    for (var i = 0; i < people.length; i++) {
+      for (var i = 0; i < people.parents.length; i++) {
+        parentArray.push(i);
+    }
+    parentArray.push(parentID);
+    }
+  return parentArray;
+}
+
+function checkChildren(people){
+  let childArray = [];
+    for (var i = 0; i < people.parents.length; i++) {
+      if (people[i].parents.includes(parentID)) {
+        let childID = people[i].id;
+        childArray.push(childID);
+      }
+  return childArray;
+}
+
+function determineDescendents(people){
+
+let descendantsArray = [];
+if(parentArray.includes(parentID)) {
+  for (i =0; i < people.length; i++){
+      if(people[i].parents(parentID)){
+        let childID = people[i];
+        descendantsArray.push(childID);
+      }
+    }
+  }
+  return descendantsArray;
+}
+
+
+
+function determineFamily(people){
+
+  let familyArray = [];
+  if(people.currentspouse > 1){
+    familyArray.push(people.currentspouse);
+  }
+  let childArray = checkChildren(people);
+    if (childArray.length > 0) {
+      familyArray.concat(childArray);
+    }
+  return familyArray;
+}
+
+
+
+
+
+  function calculateAge(person) {
   let birthday;
   birthday = person.dob;
   let dobArray = birthday.split("/");
@@ -207,6 +261,7 @@ function calculateAge(person) {
   return age;
   // newStr = str.substr(str.length - 4);
 }
+
 
 // function that prompts and validates user input
 function promptFor(question, valid){
