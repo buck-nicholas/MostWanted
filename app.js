@@ -93,12 +93,22 @@ function searchByWeight(people) {
 function searchByHeight(people) {
   let userInputHeight = prompt("How tall is the person?");
 
+
   let newArray = people.filter(function (el) {
     if(el.height == userInputHeight) {
       return true;
     }
     // return true if el.height matches userInputHeight
   });
+
+
+  let newArray = people.filter(function (el) {
+    if(el.height == userInputHeight) {
+      return true;
+    }
+    // return true if el.height matches userInputHeight
+  });
+
 
   return newArray;
 }
@@ -226,19 +236,7 @@ function checkChildren(people, person){
   return childArray;
 }
 
-// function determineDescendents(people){
-//
-// let descendantsArray = [];
-// if(parentArray.includes(parentID)) {
-//   for (i =0; i < people.length; i++){
-//       if(people[i].parents(parentID)){
-//         let childID = people[i];
-//         descendantsArray.push(childID);
-//       }
-//     }
-//   }
-//   return descendantsArray;
-// }
+
 
 function determineDescendents(people, person) {
   let parentIdArray = getParentID(people);
@@ -290,9 +288,13 @@ function determineFamily(people, person){
       }
     }
   }
+
   if (person.parents > 0) {
     familyArray = familyArray.concat(person.parents);
   }
+
+  let childArray = checkChildren(people, person);
+
   let treeArray;
   if (childArray.length > 0) {
     treeArray = familyArray.concat(childArray);
