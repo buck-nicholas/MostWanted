@@ -163,7 +163,7 @@ function mainMenu(person, people){
     break;
     case "descendants":
     // TODO: get person's descendants
-    console.log(determineDescendents(people, person));
+    displayPeople(displayDescendents(people, person));
     break;
     case "restart":
     app(people); // restart
@@ -250,7 +250,6 @@ function checkChildren(people, person){
 function determineDescendents(people, person) {
   let parentIdArray = getParentID(people);
   let familyArray = [];
-  let returnValue;
   if (parentIdArray.includes(person.id) || parentIdArray.includes(person)) {
     let childrenArray = checkChildren(people, person);
     familyArray = familyArray.concat(childrenArray);
@@ -259,6 +258,17 @@ function determineDescendents(people, person) {
     familyArray = familyArray.concat(determineDescendents(people, familyArray[i]));
   }
   return familyArray;
+}
+function displayDescendents(people, person) {
+  let descendantsArray = determineDescendents(people, person);
+  let newArray = people.filter(function (el) {
+    for (let i = 0; i < descendantsArray.length; i++) {
+      if (el.id == descendantsArray[i]) {
+        return true;
+      }
+    }
+  });
+  return newArray;
 }
 
 function determineFamily(people, person){
