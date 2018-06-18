@@ -68,7 +68,6 @@ function searchByTraits(people) {
   mainMenu(foundPerson, people);
 
 }
-
 function searchByEyeColor(people) {
   let userInputEyeColor = prompt("What color eyes does the person have? Select: Brown, Blue, Hazel, Green, or Black");
   let newArray = people.filter(function (el) {
@@ -77,9 +76,12 @@ function searchByEyeColor(people) {
     }
     // return true if el.eyeColor matches userInputEyeColor
   });
+
+  console.log(newArray);
+
+
   return newArray;
 }
-
 function searchByWeight(people) {
   let userInputWeight = prompt("How much does the person weigh?");
 
@@ -95,12 +97,22 @@ function searchByWeight(people) {
 function searchByHeight(people) {
   let userInputHeight = prompt("How tall is the person?");
 
+
   let newArray = people.filter(function (el) {
     if(el.height == userInputHeight) {
       return true;
     }
     // return true if el.height matches userInputHeight
   });
+
+
+  let newArray = people.filter(function (el) {
+    if(el.height == userInputHeight) {
+      return true;
+    }
+    // return true if el.height matches userInputHeight
+  });
+
 
   return newArray;
 }
@@ -286,9 +298,13 @@ function determineFamily(people, person){
       }
     }
   }
+
   if (person.parents > 0) {
     familyArray = familyArray.concat(person.parents);
   }
+
+  let childArray = checkChildren(people, person);
+
   let treeArray;
   if (childArray.length > 0) {
     treeArray = familyArray.concat(childArray);
