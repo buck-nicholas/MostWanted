@@ -100,16 +100,6 @@ function searchByHeight(people) {
     }
     // return true if el.height matches userInputHeight
   });
-
-
-  let newArray = people.filter(function (el) {
-    if(el.height == userInputHeight) {
-      return true;
-    }
-    // return true if el.height matches userInputHeight
-  });
-
-
   return newArray;
 }
 function searchByOccupation(people) {
@@ -292,9 +282,6 @@ function determineFamily(people, person){
   if (person.parents > 0) {
     familyArray = familyArray.concat(person.parents);
   }
-
-  let childArray = checkChildren(people, person);
-
   let treeArray;
   if (childArray.length > 0) {
     treeArray = familyArray.concat(childArray);
