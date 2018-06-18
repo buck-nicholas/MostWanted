@@ -70,15 +70,12 @@ function searchByTraits(people) {
 }
 function searchByEyeColor(people) {
   let userInputEyeColor = prompt("What color eyes does the person have? Select: Brown, Blue, Hazel, Green, or Black");
-
   let newArray = people.filter(function (el) {
     if(el.eyeColor == userInputEyeColor) {
       return true;
     }
     // return true if el.eyeColor matches userInputEyeColor
   });
-  console.log(newArray);
-
   return newArray;
 }
 function searchByWeight(people) {
@@ -121,7 +118,6 @@ function searchByAge(people){
     let age = calculateAge(people[i])
     people[i].age = age;
   }
-  console.log(people[0].firstName + "'s is " + people[0].age);
   let newArray = people.filter(function(el){
     if(el.age == userInputAge){
     return true;
@@ -154,15 +150,12 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
     displayPerson(person);
     break;
     case "family":
-    // TODO: get person's family
     displayPeople(determineFamily(people, person));
     break;
     case "descendants":
-    // TODO: get person's descendants
     displayPeople(displayDescendents(people, person));
     break;
     case "restart":
@@ -273,10 +266,33 @@ function displayDescendents(people, person) {
 
 function determineFamily(people, person){
   let familyArray = [];
+  let childArray = checkChildren(people, person);
   if(person.currentSpouse > 0){
     familyArray.push(person.currentSpouse);
+    let spouseID = people.filter(function (el) {
+      for (let i = 0; i < people.length; i++) {
+        if (el.id == person.currentSpouse) {
+          return true;
+        }
+      }
+    });
+    if (spouseID[0].parents.length > 0) {
+      for (let i = 0; i < spouseID[0].parents.length; i++) {
+        familyArray.push(spouseID[0].parents[i]);
+      }
+    }
+    let spouseKids = checkChildren(people, spouseID[0]);
+    if (spouseKids.length > 0) {
+      for (let i = 0; i < spouseKids.length; i++) {
+        if (childArray.includes(spouseKids[i]) != true) {
+          childArray.push(spouseKids[i]);
+        }
+      }
+    }
   }
-  let childArray = checkChildren(people, person);
+  if (person.parents > 0) {
+    familyArray = familyArray.concat(person.parents);
+  }
   let treeArray;
   if (childArray.length > 0) {
     treeArray = familyArray.concat(childArray);
