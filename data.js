@@ -36,8 +36,21 @@ const data = [
 		"weight": 250,
 		"eyeColor": "brown",
 		"occupation": "landscaper",
-		"parents": [],
+		"parents": [333],
 		"currentSpouse": 260451248
+	},
+    {
+		"id": 333,
+		"firstName": "Sam",
+		"lastName": "Walkens",
+		"gender": "male",
+		"dob": "5/9/1951",
+		"height": 76,
+		"weight": 250,
+		"eyeColor": "brown",
+		"occupation": "landscaper",
+		"parents": [],
+		"currentSpouse": null,
 	},
 	{
 		"id": 260451248,
