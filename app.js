@@ -26,7 +26,7 @@ function app(people){
 
 function searchByTraits(people) {
   let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
-  let filteredPeople = [];
+  let filteredPeople;
 
   switch(userSearchChoice) {
     case "height":
@@ -41,7 +41,7 @@ function searchByTraits(people) {
     case "occupation":
       filteredPeople = searchByOccupation(people);
       break;
-    case "Age":
+    case "age":
       filteredPeople = searchByAge(people);
       break;
     case "gender":
@@ -141,11 +141,11 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
-    determineFamily(people);
+    determineFamily(people, person);
     break;
     case "descendants":
-    determineDescendents(people);
     // TODO: get person's descendants
+    console.log(checkChildren(people, person))
     break;
     case "restart":
     app(people); // restart
@@ -171,6 +171,7 @@ function searchByName(people){
   return newArray;
 }
 
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -195,33 +196,35 @@ function displayPerson(person){
 function getParentID(people){
   let parentArray = [];
     for (var i = 0; i < people.length; i++) {
-      for (var j = 0; j < people.parents.length; j++) {
+      for (var j = 0; j < people[i].parents.length; j++) {
+        if (parentArray.includes(people[i].parents[j]) != true) {
         parentArray.push(people[i].parents[j]);
-    }
-    }
-  return parentArray;
-}
-
-function checkChildren(people){
-  let childArray = [];
-    for (var i = 0; i < people.length; i++) {
-      for (var j = 0; j < parents[j].length; j++){
-        if (people[i].parents[j].includes(parentID)) {
-        let childID = people.id;
-        childArray.push(childID);
       }
     }
 }
-  return childArray;
+  return parentArray;
 }
+
+
+function checkChildren(people, person){
+  let childArray = [];
+    for (var i = 0; i < people.length; i++){
+        if(people[i].parents.includes(person.id)){
+          let childID = people[i].id;
+          childArray.push(childID);
+        }
+      }
+    return childArray;
+  }
+
 
 function determineDescendents(people){
 
 let descendantsArray = [];
 if(parentArray.includes(parentID)) {
-  for (i =0; i < people.length; i++){
+  for (i = 0; i < people.length; i++){
       if(people[i].parents(parentID)){
-        let childID = people[i].id[0];
+        let childID = people[i].id;
         descendantsArray.push(childID);
       }
     }
@@ -231,18 +234,19 @@ if(parentArray.includes(parentID)) {
 
 
 
-function determineFamily(people){
+function determineFamily(people, person){
 
 
   let familyArray = [];
-  if(people.currentspouse > 1){
-    familyArray.push(people.currentspouse);
+  if(person.currentspouse > 0){
+    familyArray.push(person.currentspouse);
   }
-  let childArray = checkChildren(people);
+  let childArray = checkChildren(people, person);
     if (childArray.length > 0) {
-      familyArray.concat(childArray);
+      let familyTreeArray = familyArray.concat(childArray);
     }
-  return familyArray;
+    console.log(familyTreeArray)
+  return familyTreeArray;
 }
 
 
