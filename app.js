@@ -225,7 +225,7 @@ function getParentID(people){
 function checkChildren(people, person){
   let childArray = [];
     for (let i = 0; i < people.length; i++) {
-      if (people[i].parents.includes(person.id)) {
+      if (people[i].parents.includes(person.id) || people[i].parents.includes(person)) {
         let childID = people[i].id;
         childArray.push(childID);
       }
@@ -249,15 +249,18 @@ function checkChildren(people, person){
 
 function determineDescendents(people, person) {
   let parentIdArray = getParentID(people);
-  let familyArray;
-  if (parentIdArray.includes(person.id)) {
-    familyArray.push(checkChildren(people, person));
-    for (let i = 0; i < familyArray.length; i++) {
-      determineDescendents(people, familyArray[i]);
-    }
+  let familyArray = [];
+  let returnValue;
+  if (parentIdArray.includes(person.id) || parentIdArray.includes(person)) {
+    let childrenArray = checkChildren(people, person);
+    familyArray = familyArray.concat(childrenArray);
+  }
+  for (let i = 0; i < familyArray.length; i++) {
+    familyArray = familyArray.concat(determineDescendents(people, familyArray[i]));
   }
   return familyArray;
 }
+
 function determineFamily(people, person){
   let familyArray = [];
   if(person.currentSpouse > 0){
